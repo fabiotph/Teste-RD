@@ -1,4 +1,5 @@
 const { RouteModel } = require('../models/route');
+const { validInput } = require('../utils/validation');
 
 
 exports.getMinRoute = (from, to)=>{
@@ -6,5 +7,6 @@ exports.getMinRoute = (from, to)=>{
 }
 
 exports.addRoute = ({from, to, price})=>{
-    RouteModel.addRoute(from.toUpperCase(), to.toUpperCase(), parseInt(price));
+    validInput({from, to, price});
+    RouteModel.addRoute({from: from.toUpperCase(), to: to.toUpperCase(), price: parseInt(price)});
 }

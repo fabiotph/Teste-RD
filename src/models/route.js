@@ -1,20 +1,14 @@
 /**
  * Singleton, garantir que teremos apenas uma instância de RouteModel
  */
-const file = require('../utils/file');
+const file = require('../utils/csvFile');
+const { validInput } = require('../utils/validation')
+
 class RouteModel{
 
     constructor(){
         this.graph = new Map();
-
-        //this.load();
-        this.addRoute({from: "GRU", to: "BRC", price: 10})
-        this.addRoute({from: "GRU", to: "SCL", price: 18})
-        this.addRoute({from: "GRU", to: "ORL", price: 56})
-        this.addRoute({from: "GRU", to: "CDG", price: 75})
-        this.addRoute({from: "SCL", to: "ORL", price: 20})
-        this.addRoute({from: "BRC", to: "SCL", price: 5})
-        this.addRoute({from: "ORL", to: "CDG", price: 5})
+        this.load();
     }
 
     static getInstance() {
@@ -37,9 +31,24 @@ class RouteModel{
         }
         this.graph.get(from).set(to, price)
     }
-
-    addRouteFromArray(paths){
-
+/**
+ * 
+ * @param {Array} data 
+ */
+    addRouteFromArray(data){
+        for(let i = 0; i<data.length; i+=3){
+            let input = {
+                from: data[i],
+                to: data[i+1],
+                price: parseInt(data[i+2])
+            }
+            try{
+                validInput(input);
+                this.addRoute(input)
+            }catch(err){
+                console.error(err)
+            }
+        }
     }
 
     /**
@@ -50,7 +59,6 @@ class RouteModel{
      */
 
     calculateRoute(from, to){
-        console.log("calculateRoute")
         let explored = new Map();
         let distance = {};
         let previous = {};
@@ -79,8 +87,6 @@ class RouteModel{
                         }
                 }
             }
-        console.log(distance);
-        console.log(previous);
 
         if (distance[to] == Math.min()) return null;
 
@@ -108,8 +114,8 @@ class RouteModel{
     }
 
     load(){
-        let value = file.loadCSV();
-        this.addRouteFromArray(value);
+        let data = file.load();
+        this.addRouteFromArray(data);
     }
     
 }
