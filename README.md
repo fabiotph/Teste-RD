@@ -28,8 +28,8 @@ Rota                                | Método |  Descrição
 ```json
 {
   "from": "BRC",
-	"to": "ORL",
-	"price": 20
+  "to": "ORL",
+  "price": 20
 }
 ```
 
