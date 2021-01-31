@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
+const { logRoute } = require('./src/utils/logger')
 
 const PORT = process.env.PORT;
 
@@ -9,7 +10,7 @@ const route = require('./src/routes/route');
 
 app.use(bodyParser.json());
 
-
+app.use(logRoute)
 
 app.use('/route', route);
 

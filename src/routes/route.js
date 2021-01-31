@@ -1,10 +1,11 @@
 const { Router }  = require('express');
 const RouteController = require('../controllers/route')
+const { cache } = require('../repository/cache/middleware')
 
 const router = Router();
 
 router.route('/')
-    .get((req, res)=>{
+    .get(cache, (req, res)=>{
         let { from, to } = req.query;
         let response = RouteController.getMinRoute(from, to)
         if (!response)
