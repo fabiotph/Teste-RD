@@ -53,6 +53,6 @@ Rota                                | Método |  Descrição
 Execute o comando abaixo dentro da pasta do projeto:  
 `docker-compose run server npm test`
 
-## Utilização de cache
+## :floppy_disk: Utilização de cache
 Como uma forma de melhorar o desempenho, foi adicionado um cache simples, pois não há necessidade de calcular novamente uma rota que ja foi calculada.
-Quando houver uma requisição post para adicionar uma nova rota o Observable notifica o cache a ser limpado.
+Quando houver uma requisição POST para adicionar uma rota o Observable notifica o cache a ser limpado.
