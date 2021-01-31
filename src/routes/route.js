@@ -7,10 +7,15 @@ const router = Router();
 router.route('/')
     .get(cache, (req, res)=>{
         let { from, to } = req.query;
-        let response = RouteController.getMinRoute(from, to)
-        if (!response)
-            return res.status(404).json();
-        return res.json(response);
+        try{
+            let response = RouteController.getMinRoute(from, to)
+            if (!response)
+                return res.status(404).json();
+            return res.json(response);
+        }
+        catch{
+            res.status(400).json();
+        }
     })
 
     .post((req, res)=>{
@@ -18,7 +23,7 @@ router.route('/')
         try{
             RouteController.addRoute({from, to, price})
             res.status(204).json();
-        }catch(err){
+        }catch{
             res.status(400).json();
         }
     });
