@@ -35,7 +35,7 @@ describe('Route test', function() {
       });
     });
 
-    describe('Get Min Path and Price Route ORL -> BRC added new route', function() {
+    describe('Get the shortest route and the price of the route that doesnt exist', function() {
       let result = RouteModel.calculateRoute("ORL", "BRC")
       it('should return null', function() {
         assert.strictEqual(result, null);

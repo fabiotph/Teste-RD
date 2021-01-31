@@ -8,7 +8,6 @@ class Cache{
         this.data = new Map();
     }
     get(key){
-        console.log(this)
         return this.data.get(key);
     }
 
