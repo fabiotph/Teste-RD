@@ -8,6 +8,9 @@ const route = require('./src/routes/route');
 
 
 app.use(bodyParser.json());
+
+
+
 app.use('/route', route);
 
 app.listen(PORT, (err)=>{

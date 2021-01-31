@@ -5,14 +5,14 @@ const router = Router();
 router.route('/')
 
     .get((req, res)=>{
-        let from = req.query.from;
-        let to = req.query.to;
-
-        res.json({msg: `GET route from ${from} to ${to}`})
+        let { from, to } = req.query;
+        let response = RouteController.getMinRoute(from, to)
+        res.json(response);
     })
 
     .post((req, res)=>{
         let body = req.body;
+        RouteController.addRoute(body)
         res.json({msg: `POST route`, body: body})
     });
 

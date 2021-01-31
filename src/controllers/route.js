@@ -1,9 +1,10 @@
-const Route = require('../models/route');
+const { RouteModel } = require('../models/route');
 
-exports.getMinRoute = (req, res)=>{
 
+exports.getMinRoute = (from, to)=>{
+    return RouteModel.calculateRoute(from, to);
 }
 
-exports.addRoute = (req, res)=>{
-
+exports.addRoute = (obj)=>{
+    RouteModel.addRoute(obj);
 }
